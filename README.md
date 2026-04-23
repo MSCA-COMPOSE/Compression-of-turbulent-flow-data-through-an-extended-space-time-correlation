@@ -1,1 +1,1 @@
-# TSQR-algorithm-for-compression-of-turbulent-flows-datasets
+# TSQR algorithm for compression of turbulent flows datasets

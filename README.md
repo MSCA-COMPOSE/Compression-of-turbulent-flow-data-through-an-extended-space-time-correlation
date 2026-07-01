@@ -21,7 +21,6 @@ The snapshots `u_i(x, t)` are arranged into the fluctuation matrix `X` of size `
 - `hpda/`: Python source files for the four workflow stages and the associated helper functions.
 - `submission/`: example SLURM submission scripts and a driver that submits the four stages in sequence.
 - `FLOW/`: input-data directory for the workflow. It contains the sequence file used by the reduced public test case. The full set of raw flow snapshots and the grid are not stored directly in this GitHub repository because of their size, and can be retrieved from Zenodo (see `FLOW/README.md`).
-- `STATS/`: output-data directory for the workflow. It holds the compressed representation (reduced modes, eigenvectors, means) and the reconstruction-check results. Some large files can be retrieved from Zenodo (see `STATS/README.md`).
 
 ## Workflow overview
 

@@ -6,14 +6,12 @@
 
 This repository contains the computational framework presented in the manuscript currently under review on the GPU-accelerated compression, or reduced-order representation, of large turbulent-flow datasets via Proper Orthogonal Decomposition (POD).
 
-The POD stage adopted here is the same framework introduced in Biassoni et al. (2024), later extended to SPOD in Biassoni et al. (2026). The original POD-related public record is available on Zenodo at [https://zenodo.org/records/13945003](https://zenodo.org/records/13945003), while the SPOD-oriented public workflow is available at the ACROSS public aeronautics repository: [https://git.mycloud-links.com/across-public/orchestrator/applications/aeronautics](https://git.mycloud-links.com/across-public/orchestrator/applications/aeronautics).
-
 This public repository provides the reduced workflow used for the present study, including the GPU-enabled Dask implementation for the snapshot-POD compression, a reduced public test case, example outputs, and a reconstruction-error check.
 
 ## Algorithm
 
 <p align="center">
-  <img src="figures/compression_algorithm.png" alt="Compression and reconstruction algorithm" width="840">
+  <img src="tsqr_algorithm.png" alt="Compression and reconstruction algorithm" width="840">
 </p>
 
 The snapshots `u_i(x, t)` are arranged into the fluctuation matrix `X` of size `N_s x N_h`, with `N_s = 3 n_x n_y` (the three velocity components over the non-homogeneous plane) and `N_h = n_z n_t` (the spanwise-homogeneous direction folded together with the snapshots). The temporal correlation matrix `C = X^T X` is factorised with a randomized eigensolver: a tall-skinny QR of `Y = C Ω` yields an orthonormal basis `Q`, the small matrix `B = Q^T C Q` is diagonalised with `eigh`, and the `r` leading modes needed to reach the energy target are retained. Only the reduced spatial modes `Φ_r` (`N_s x r`) and the reduced temporal eigenvectors `V_r` (`N_h x r`) are stored; any snapshot is recovered as `X_r = Φ_r V_r^T`.
@@ -24,7 +22,6 @@ The snapshots `u_i(x, t)` are arranged into the fluctuation matrix `X` of size `
 - `submission/`: example SLURM submission scripts and a driver that submits the four stages in sequence.
 - `FLOW/`: input-data directory for the workflow. It contains the sequence file used by the reduced public test case. The full set of raw flow snapshots and the grid are not stored directly in this GitHub repository because of their size, and can be retrieved from Zenodo (see `FLOW/README.md`).
 - `STATS/`: output-data directory for the workflow. It holds the compressed representation (reduced modes, eigenvectors, means) and the reconstruction-check results. Some large files can be retrieved from Zenodo (see `STATS/README.md`).
-- `figures/`: figures used in this README (the algorithm overview and an example reconstruction).
 
 ## Workflow overview
 
@@ -120,7 +117,7 @@ Running the pipeline produces, in the output directory:
 ## Example: reconstructed flow fields
 
 <p align="center">
-  <img src="figures/compressed_flowfields.png" alt="Reference, reconstructed and error turbulent kinetic energy fields" width="820">
+  <img src="recon_fields.png" alt="Reference, reconstructed and error turbulent kinetic energy fields" width="820">
 </p>
 
 Turbulent kinetic energy `k/(rho U^3)` on the blade for three representative cases (`Lam999`, `Turb999`, `Turb950`, where the label combines the inlet condition with the retained-energy target). Each column compares the reference field (top), the field reconstructed from the compressed representation (middle), and the pointwise error `Δk/(rho U^3)` (bottom). The reconstruction stays close to the reference even at the more aggressive energy targets, with the residual error concentrated in the smallest turbulent scales.

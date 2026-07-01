@@ -1,12 +1,12 @@
 # Turbulent kinetic energy budget-oriented compression of high-fidelity flow data
-<!-- TODO: update the repository name/title above and the DOI badge below once the Zenodo record is minted. -->
+<!-- TODO: fill in the code-release DOI (badge and citation below) once the GitHub release is archived on Zenodo. -->
 
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.XXXXXXXX.svg)](https://doi.org/10.5281/zenodo.XXXXXXXX)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 This repository contains the computational framework presented in the manuscript currently under review on the GPU-accelerated compression, or reduced-order representation, of large turbulent-flow datasets via Proper Orthogonal Decomposition (POD).
 
-This public repository provides the reduced workflow used for the present study, including the GPU-enabled Dask implementation for the snapshot-POD compression, a reduced public test case, example outputs, and a reconstruction-error check.
+This public repository provides the GPU-enabled Dask implementation of the snapshot-POD compression workflow together with a reconstruction-error check. The input dataset used in the study is openly archived on Zenodo (see [Public dataset](#public-dataset)).
 
 ## Algorithm
 
@@ -20,7 +20,7 @@ The snapshots `u_i(x, t)` are arranged into the fluctuation matrix `X` of size `
 
 - `hpda/`: Python source files for the four workflow stages and the associated helper functions.
 - `submission/`: example SLURM submission scripts and a driver that submits the four stages in sequence.
-- `FLOW/`: input-data directory for the workflow. It contains the sequence file used by the reduced public test case. The full set of raw flow snapshots and the grid are not stored directly in this GitHub repository because of their size, and can be retrieved from Zenodo (see `FLOW/README.md`).
+- `FLOW/`: pointer to the public input dataset (raw flow snapshots, grid and sequence file). Because of its size the dataset is not stored in this GitHub repository but archived on Zenodo at [10.5281/zenodo.19481070](https://doi.org/10.5281/zenodo.19481070) (see `FLOW/README.md`).
 
 ## Workflow overview
 
@@ -40,11 +40,9 @@ The compression workflow follows four stages, each mapped to one Python script a
 
 The submission scripts in `submission/` show how these four stages can be run sequentially on an HPC system.
 
-## Reduced public test case
+## Public dataset
 
-The repository includes a reduced public test case designed to reproduce the workflow on a much smaller dataset than the original production case.
-
-The `FLOW/` directory mirrors the input-data structure used by the workflow. The sequence file required by the reduced case is provided in the repository; the raw snapshots and grid are distributed separately through Zenodo because of their size (see `FLOW/README.md`).
+The input dataset used in this study — the velocity snapshots, grid and sequence file for the controlled-diffusion-airfoil cascade — is openly archived on Zenodo at [https://doi.org/10.5281/zenodo.19481070](https://doi.org/10.5281/zenodo.19481070). The `FLOW/` directory documents the expected input layout and how to point the workflow at the downloaded data (see `FLOW/README.md`).
 
 ## Installation on an HPC system
 
@@ -87,18 +85,18 @@ A representative environment setup is:
 
 This is a cleaned version of the environment used for the GPU workflow. Cluster-specific details such as account names, partitions, module names and the conda environment prefix must be adapted by the user. The submission scripts use the placeholders `YOUR_ACCOUNT`, `YOUR_PARTITION` and `YOUR_GPU_CONDA_ENV` for exactly these values.
 
-## Running the reduced workflow
+## Running the workflow
 
-The scripts in `submission/` illustrate the intended execution order. Edit the paths and node counts at the top of `run_comp_pipeline.sh`, then submit the whole chain from the `submission/` directory:
+The scripts in `submission/` illustrate the intended execution order. Edit the paths, the number of snapshots, the compression level and the node counts at the top of `run_comp_pipeline.sh`, then submit the whole chain from the `submission/` directory:
 
 ```bash
 cd submission
 bash run_comp_pipeline.sh
 ```
 
-The driver exports the input/output locations and the number of snapshots, then submits the four stages with SLURM `afterok` dependencies so that each stage starts only if the previous one succeeded. The individual stages can also be submitted manually in the same order.
+The driver exports the input/output locations, the number of snapshots and the compression level (energy target), then submits the four stages with SLURM `afterok` dependencies so that each stage starts only if the previous one succeeded. The individual stages can also be submitted manually in the same order.
 
-The directory structure expected by the scripts (input in `FLOW/`, output in `STATS/`) is already reflected in this repository.
+Input is read from the dataset directory set as `INPUTDIR`, and all outputs are written to the directory set as `OUTDIR`; both are configured at the top of `run_comp_pipeline.sh`.
 
 ## Outputs
 
@@ -123,9 +121,9 @@ Turbulent kinetic energy `k/(rho U^3)` on the blade for three representative cas
 
 If you use this repository, please cite the archived Zenodo release:
 
-<!-- TODO: insert the title, year and Zenodo DOI once the record is minted. -->
+<!-- TODO: insert the code-release DOI once the GitHub release is archived on Zenodo. -->
 
-> Lopes, G., Henningson, D., & Lengani, D. (2026). *MSCA-COMPOSE/GPU-framework-for-turbulent-flow-compression: v1.0.0* (v1.0.0). Zenodo. [https://doi.org/10.5281/zenodo.XXXXXXXX](https://doi.org/10.5281/zenodo.XXXXXXXX)
+> Lopes, G., Henningson, D., & Lengani, D. (2026). *MSCA-COMPOSE/TSQR-algorithm-for-compression-of-turbulent-flows-datasets: v1.0.0* (v1.0.0). Zenodo. [https://doi.org/10.5281/zenodo.XXXXXXXX](https://doi.org/10.5281/zenodo.XXXXXXXX)
 
 **DOI**: [10.5281/zenodo.XXXXXXXX](https://doi.org/10.5281/zenodo.XXXXXXXX)
 

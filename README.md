@@ -4,7 +4,7 @@
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.XXXXXXXX.svg)](https://doi.org/10.5281/zenodo.XXXXXXXX)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-This repository contains the computational framework presented in the manuscript currently under review on the GPU-accelerated compression, or reduced-order representation, of large turbulent-flow datasets via Proper Orthogonal Decomposition (POD).
+This repository contains the computational framework presented in the manuscript currently under review on the GPU-accelerated compression of large turbulent flow datasets via Proper Orthogonal Decomposition (POD).
 
 This public repository provides the GPU-enabled Dask implementation of the snapshot-POD compression workflow together with a reconstruction-error check. The input dataset used in the study is openly archived on Zenodo (see [Public dataset](#public-dataset)).
 

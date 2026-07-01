@@ -46,8 +46,6 @@ The repository includes a reduced public test case designed to reproduce the wor
 
 The `FLOW/` directory mirrors the input-data structure used by the workflow. The sequence file required by the reduced case is provided in the repository; the raw snapshots and grid are distributed separately through Zenodo because of their size (see `FLOW/README.md`).
 
-The `STATS/` directory mirrors the output-data structure used by the workflow and is populated with the compressed outputs when the pipeline is run (see `STATS/README.md`).
-
 ## Installation on an HPC system
 
 The workflow was developed and tested in a module-based HPC environment using Anaconda, Dask and CuPy. The GPU stages require a Python environment with CUDA-aware packages.

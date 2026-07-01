@@ -1,1 +1,1 @@
-# TSQR algorithm for compression of turbulent flows datasets
+# Turbulent kinetic energy budget-oriented compression of high-fidelity flow data

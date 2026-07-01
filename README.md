@@ -131,7 +131,7 @@ If you use this repository, please cite the archived Zenodo release:
 
 The scientific context, methodology, and discussion of results are described in the associated manuscript:
 
-> Lopes, G., Henningson, D., & Lengani, D. *Title of the compression manuscript.* Submitted to *Journal name* (under review), 2026.
+> Lopes, G., Henningson, D., & Lengani, D. *Turbulent kinetic energy budget-oriented compression of high-fidelity flow data.* Submitted to *Journal of Fluid Mechanics* (under review), 2026.
 
 This entry will be updated with the journal reference and DOI upon acceptance.
 

@@ -1,5 +1,4 @@
-# Turbulent kinetic energy budget-oriented compression of high-fidelity flow data
-<!-- TODO: fill in the code-release DOI (badge and citation below) once the GitHub release is archived on Zenodo. -->
+# Compression of turbulent flow data through an extended space-time correlation
 
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.XXXXXXXX.svg)](https://doi.org/10.5281/zenodo.XXXXXXXX)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
@@ -121,15 +120,13 @@ Turbulent kinetic energy `k/(rho U^3)` on the blade for three representative cas
 
 If you use this repository, please cite the archived Zenodo release:
 
-<!-- TODO: insert the code-release DOI once the GitHub release is archived on Zenodo. -->
-
-> Lopes, G., Henningson, D., & Lengani, D. (2026). *MSCA-COMPOSE/TSQR-algorithm-for-compression-of-turbulent-flows-datasets: v1.0.0* (v1.0.0). Zenodo. [https://doi.org/10.5281/zenodo.XXXXXXXX](https://doi.org/10.5281/zenodo.XXXXXXXX)
+> Lopes, G., Henningson, D., & Lengani, D. (2026). *MSCA-COMPOSE/Compression-of-turbulent-flow-data-through-an-extended-space-time-correlation: v1.0.0* (v1.0.0). Zenodo. [https://doi.org/10.5281/zenodo.XXXXXXXX](https://doi.org/10.5281/zenodo.XXXXXXXX)
 
 **DOI**: [10.5281/zenodo.XXXXXXXX](https://doi.org/10.5281/zenodo.XXXXXXXX)
 
 The scientific context, methodology, and discussion of results are described in the associated manuscript:
 
-> Lopes, G., Henningson, D., & Lengani, D. *Turbulent kinetic energy budget-oriented compression of high-fidelity flow data.* Submitted to the *Journal of Fluid Mechanics* (under review), 2026.
+> Lopes, G., Henningson, D., & Lengani, D. *Compression of turbulent flow data through an extended space-time correlation.* Submitted to the *Journal of Fluid Mechanics* (under review), 2026.
 
 This entry will be updated with the journal reference and DOI upon acceptance.
 

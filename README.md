@@ -19,7 +19,7 @@ The snapshots `u_i(x, t)` are arranged into the fluctuation matrix `X` of size `
 
 - `hpda/`: Python source files for the four workflow stages and the associated helper functions.
 - `submission/`: example SLURM submission scripts and a driver that submits the four stages in sequence.
-- `FLOW/`: pointer to the public input dataset (raw flow snapshots, grid and sequence file). Because of its size the dataset is not stored in this GitHub repository but archived on Zenodo at [10.5281/zenodo.19481070](https://doi.org/10.5281/zenodo.19481070) (see `FLOW/README.md`).
+- `FLOW/`: pointer to the reduced public test-case dataset (raw flow snapshots, grid and sequence file). Because of its size the dataset is not stored in this GitHub repository but archived on Zenodo at [10.5281/zenodo.19481070](https://doi.org/10.5281/zenodo.19481070) (see `FLOW/README.md`).
 
 ## Workflow overview
 
@@ -41,7 +41,7 @@ The submission scripts in `submission/` show how these four stages can be run se
 
 ## Public dataset
 
-The input dataset used in this study — the velocity snapshots, grid and sequence file for the controlled-diffusion-airfoil cascade — is openly archived on Zenodo at [https://doi.org/10.5281/zenodo.19481070](https://doi.org/10.5281/zenodo.19481070). The `FLOW/` directory documents the expected input layout and how to point the workflow at the downloaded data (see `FLOW/README.md`).
+A reduced public test case — velocity snapshots, grid and sequence file for the controlled-diffusion-airfoil cascade — is openly archived on Zenodo at [https://doi.org/10.5281/zenodo.19481070](https://doi.org/10.5281/zenodo.19481070). It allows the full workflow to be run end to end on a small dataset; it is not the full DNS database analysed in the associated manuscript. The `FLOW/` directory documents the expected input layout and how to point the workflow at the downloaded data (see `FLOW/README.md`).
 
 ## Installation on an HPC system
 
@@ -102,7 +102,7 @@ Input is read from the dataset directory set as `INPUTDIR`, and all outputs are 
 Running the pipeline produces, in the output directory:
 
 - `mean_{u,v,w}_<block>.parquet` — temporal mean fields,
-- `C_matrix_r*_c*.h5`, `C_metadata.json` — the temporal correlation matrix, stored by chunks,
+- `C_matrix_r*_c*.h5`, `C_metadata.json` — the correlation operator, stored by chunks,
 - `V_rows_*.h5` — the reduced temporal eigenvectors,
 - `phi_{u,v,w}_a*_b*.npy`, `EV_metadata.json` — the reduced spatial modes (compressed output),
 - `k_per_target.json` — number of modes retained for each energy target,
@@ -126,7 +126,7 @@ If you use this repository, please cite the archived Zenodo release:
 
 The scientific context, methodology, and discussion of results are described in the associated manuscript:
 
-> Lopes, G., Henningson, D., & Lengani, D. *Compression of turbulent flow data through an extended space-time correlation.* Submitted to the *Journal of Fluid Mechanics* (under review), 2026.
+> Lopes, G., Lengani, D., & Henningson, D. *Compression of turbulent flow data through an extended space-time correlation.* Submitted to the *Journal of Fluid Mechanics* (under review), 2026.
 
 This entry will be updated with the journal reference and DOI upon acceptance.
 

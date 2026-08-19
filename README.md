@@ -3,9 +3,9 @@
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.XXXXXXXX.svg)](https://doi.org/10.5281/zenodo.XXXXXXXX)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-This repository contains the computational framework presented in the manuscript currently under review on the GPU-accelerated compression of large turbulent flow datasets via Proper Orthogonal Decomposition (POD).
+This repository contains the computational framework presented in the manuscript currently under review on the GPU-accelerated compression of large turbulent flow datasets through an extended space-time correlation.
 
-This public repository provides the GPU-enabled Dask implementation of the snapshot-POD compression workflow together with a reconstruction-error check. The input dataset used in the study is openly archived on Zenodo (see [Public dataset](#public-dataset)).
+This public repository provides the GPU-enabled Dask implementation of the compression workflow together with a reconstruction-error check.
 
 ## Algorithm
 
@@ -13,7 +13,7 @@ This public repository provides the GPU-enabled Dask implementation of the snaps
   <img src="tsqr_algorithm.png" alt="Compression and reconstruction algorithm" width="840">
 </p>
 
-The snapshots `u_i(x, t)` are arranged into the fluctuation matrix `X` of size `N_s x N_h`, with `N_s = 3 n_x n_y` (the three velocity components over the non-homogeneous plane) and `N_h = n_z n_t` (the spanwise-homogeneous direction folded together with the snapshots). The temporal correlation matrix `C = X^T X` is factorised with a randomized eigensolver: a tall-skinny QR of `Y = C Ω` yields an orthonormal basis `Q`, the small matrix `B = Q^T C Q` is diagonalised with `eigh`, and the `r` leading modes needed to reach the energy target are retained. Only the reduced spatial modes `Φ_r` (`N_s x r`) and the reduced temporal eigenvectors `V_r` (`N_h x r`) are stored; any snapshot is recovered as `X_r = Φ_r V_r^T`.
+The snapshots `u_i(x, t)` are arranged into the fluctuation matrix `X` of size `N_s x N_h`, with `N_s = 3 n_x n_y` (the three velocity components over the non-homogeneous plane) and `N_h = n_z n_t` (the spanwise-homogeneous direction folded together with the snapshots). The correlation operator `C = X^T X` of size `N_h x N_h`, coupling the spanwise direction and time, is factorised with a randomized eigensolver: a tall-skinny QR of `Y = C Ω` yields an orthonormal basis `Q`, the small matrix `B = Q^T C Q` is diagonalised with `eigh`, and the `r` leading modes needed to reach the energy target are retained. Only the reduced spatial modes `Φ_r` (`N_s x r`) and the reduced temporal eigenvectors `V_r` (`N_h x r`) are stored; any snapshot is recovered as `X_r = Φ_r V_r^T`.
 
 ## Repository structure
 
@@ -26,7 +26,7 @@ The snapshots `u_i(x, t)` are arranged into the fluctuation matrix `X` of size `
 The compression workflow follows four stages, each mapped to one Python script and one SLURM submission script:
 
 1. **Read and correlation matrix** (`1_RED_dask_read_POD.py`, `J1_RED_read_GPU.sh`).
-   The raw snapshots are read and the velocity components `u, v, w` are assembled into a fluctuation matrix `X = [u; v; w]` after removing the temporal mean. The temporal correlation matrix `C = X^T X` is then computed (method of snapshots) and written to disk in HDF5 chunks together with `C_metadata.json`. The mean fields are saved in Parquet format.
+   The raw snapshots are read and the velocity components `u, v, w` are assembled into a fluctuation matrix `X = [u; v; w]` after removing the temporal mean. The correlation operator `C = X^T X` of size `N_h x N_h`, coupling the spanwise direction and time, is factorised with a randomized eigensolver: The mean fields are saved in Parquet format.
 
 2. **Eigendecomposition** (`2_Comp_Eig.py`, `J2_gpu_comp.sh`).
    A randomized GPU eigensolver decomposes `C`, the cumulative energy content is evaluated, and the number of modes `k` required to reach the target energy is selected. The reduced temporal eigenvectors `V` are written by rows in HDF5, and the number of modes retained for several energy targets is stored in `k_per_target.json`.
@@ -114,13 +114,13 @@ Running the pipeline produces, in the output directory:
   <img src="recon_fields.png" alt="Reference, reconstructed and error turbulent kinetic energy fields" width="820">
 </p>
 
-Turbulent kinetic energy `k/(rho U^3)` on the blade for three representative cases (`Lam999`, `Turb999`, `Turb950`, where the label combines the inlet condition with the retained-energy target). Each column compares the reference field (top), the field reconstructed from the compressed representation (middle), and the pointwise error `Δk/(rho U^3)` (bottom). The reconstruction stays close to the reference even at the more aggressive energy targets, with the residual error concentrated in the smallest turbulent scales.
+Turbulent kinetic energy `k/U^2` on the blade for three representative cases (`Lam999`, `Turb999`, `Turb950`, where the label combines the inlet condition with the retained-energy target). Each column compares the reference field (top), the field reconstructed from the compressed representation (middle), and the pointwise error `Δk/U^2` (bottom). The reconstruction stays close to the reference even at the more aggressive energy targets, with the residual error concentrated in the smallest turbulent scales.
 
 ## Citation
 
 If you use this repository, please cite the archived Zenodo release:
 
-> Lopes, G., Henningson, D., & Lengani, D. (2026). *MSCA-COMPOSE/Compression-of-turbulent-flow-data-through-an-extended-space-time-correlation: v1.0.0* (v1.0.0). Zenodo. [https://doi.org/10.5281/zenodo.XXXXXXXX](https://doi.org/10.5281/zenodo.XXXXXXXX)
+> Lopes, G., Lengani, D., & Henningson, D. (2026). *MSCA-COMPOSE/Compression-of-turbulent-flow-data-through-an-extended-space-time-correlation: v1.0.0* (v1.0.0). Zenodo. [https://doi.org/10.5281/zenodo.XXXXXXXX](https://doi.org/10.5281/zenodo.XXXXXXXX)
 
 **DOI**: [10.5281/zenodo.XXXXXXXX](https://doi.org/10.5281/zenodo.XXXXXXXX)
 

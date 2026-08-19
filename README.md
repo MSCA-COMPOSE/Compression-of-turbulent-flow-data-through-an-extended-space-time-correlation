@@ -120,9 +120,9 @@ Turbulent kinetic energy `k/U^2` on the blade for three representative cases (`L
 
 If you use this repository, please cite the archived Zenodo release:
 
-> Lopes, G., Lengani, D., & Henningson, D. (2026). *MSCA-COMPOSE/Compression-of-turbulent-flow-data-through-an-extended-space-time-correlation: v1.0.0* (v1.0.0). Zenodo. [https://doi.org/10.5281/zenodo.XXXXXXXX](https://doi.org/10.5281/zenodo.XXXXXXXX)
+> Lopes, G., Lengani, D., & Henningson, D. (2026). *MSCA-COMPOSE/Compression-of-turbulent-flow-data-through-an-extended-space-time-correlation: 1.0.0* (1.0.0). Zenodo. [https://doi.org/10.5281/zenodo.22013927](https://doi.org/10.5281/zenodo.22013927)
 
-**DOI**: [10.5281/zenodo.XXXXXXXX](https://doi.org/10.5281/zenodo.XXXXXXXX)
+**DOI**: [10.5281/zenodo.22013927](https://doi.org/10.5281/zenodo.22013927)
 
 The scientific context, methodology, and discussion of results are described in the associated manuscript:
 
